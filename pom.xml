@@ -11,40 +11,53 @@
   <packaging>hpi</packaging>
 
   <name>GitHub Branch Source Plugin</name>
+  <description>Example Jenkins Plugin POM</description>
+  <url>https://github.com/santhoshi0705/splunkforjenkins</url>
 
   <repositories>
     <repository>
-      <id>repo.jenkins-ci.org</id>
-      <url>https://repo.jenkins-ci.org/public/</url>
+      <id>jenkins-plugin-releases</id>
+      <url>https://repo.jenkins-ci.org/releases/</url>
     </repository>
   </repositories>
 
   <pluginRepositories>
     <pluginRepository>
-      <id>repo.jenkins-ci.org</id>
-      <url>https://repo.jenkins-ci.org/public/</url>
+      <id>jenkins-plugin-releases</id>
+      <url>https://repo.jenkins-ci.org/releases/</url>
     </pluginRepository>
   </pluginRepositories>
 
   <properties>
-    <maven.compiler.source>17</maven.compiler.source>
-    <maven.compiler.target>17</maven.compiler.target>
-    <sonar-maven-plugin.version>4.0.0.4121</sonar-maven-plugin.version>
+    <java.level>11</java.level> <!-- Or 8 depending on your Jenkins version -->
+    <jenkins.version>2.414.1</jenkins.version> <!-- Use the Jenkins core version -->
+    <hpi.plugin.version>4.50</hpi.plugin.version> <!-- latest hpi plugin version -->
   </properties>
 
+  <dependencies>
+    <!-- Your plugin dependencies go here, example: -->
+    <dependency>
+      <groupId>org.jenkins-ci.plugins</groupId>
+      <artifactId>structs</artifactId>
+      <version>1.32</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
   <build>
+    <extensions>
+      <extension>
+        <groupId>org.jenkins-ci.tools</groupId>
+        <artifactId>maven-hpi-plugin</artifactId>
+        <version>${hpi.plugin.version}</version>
+      </extension>
+    </extensions>
+
     <plugins>
       <plugin>
         <groupId>org.jenkins-ci.tools</groupId>
         <artifactId>maven-hpi-plugin</artifactId>
-        <version>4.46</version> <!-- Use a known stable version available in Jenkins repo -->
-        <extensions>true</extensions>
-      </plugin>
-
-      <plugin>
-        <groupId>org.sonarsource.scanner.maven</groupId>
-        <artifactId>sonar-maven-plugin</artifactId>
-        <version>${sonar-maven-plugin.version}</version>
+        <version>${hpi.plugin.version}</version>
       </plugin>
     </plugins>
   </build>
