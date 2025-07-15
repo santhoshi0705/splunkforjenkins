@@ -1,58 +1,67 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-                             https://maven.apache.org/xsd/maven-4.0.0.xsd">
+                             http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>com.example.jenkins</groupId>
   <artifactId>your-plugin-name</artifactId>
   <version>1.0-SNAPSHOT</version>
-  
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.jenkins-ci.tools</groupId>
-        <artifactId>maven-hpi-plugin</artifactId>
-        <version>${maven-hpi-plugin.version}</version>
-      </plugin>
-    </plugins>
-
-    <extensions>
-      <extension>
-        <groupId>org.jenkins-ci.tools</groupId>
-        <artifactId>maven-hpi-plugin</artifactId>
-        <version>${maven-hpi-plugin.version}</version>
-      </extension>
-    </extensions>
-  </build>
+  <packaging>hpi</packaging>
 
   <name>Your Jenkins Plugin</name>
-  <url>https://github.com/your-repo/your-plugin</url>
+  <url>http://www.example.com/jenkins-plugin</url>
 
   <properties>
-    <jenkins.version>2.414.3</jenkins.version> <!-- latest Jenkins LTS version -->
-    <java.level>11</java.level> <!-- Jenkins recommends Java 11+ -->
-    <maven-hpi-plugin.version>4.54</maven-hpi-plugin.version> <!-- latest plugin version -->
+    <java.level>11</java.level>  <!-- Adjust Java version as needed -->
+    <jenkins.version>2.414.1</jenkins.version> <!-- Latest LTS version, change if needed -->
+    <hpi.plugin.version>4.54</hpi.plugin.version>
   </properties>
+
+  <pluginRepositories>
+    <pluginRepository>
+      <id>jenkins-plugin-releases</id>
+      <url>https://repo.jenkins-ci.org/public/</url>
+    </pluginRepository>
+  </pluginRepositories>
 
   <repositories>
     <repository>
       <id>jenkins-releases</id>
-      <url>https://repo.jenkins-ci.org/releases/</url>
+      <url>https://repo.jenkins-ci.org/public/</url>
     </repository>
   </repositories>
 
   <dependencies>
+    <!-- Jenkins core dependency -->
     <dependency>
       <groupId>org.jenkins-ci.main</groupId>
       <artifactId>jenkins-core</artifactId>
       <version>${jenkins.version}</version>
       <scope>provided</scope>
     </dependency>
-    
+
     <!-- Add your other dependencies here -->
 
   </dependencies>
+
+  <build>
+    <extensions>
+      <extension>
+        <groupId>org.jenkins-ci.tools</groupId>
+        <artifactId>maven-hpi-plugin</artifactId>
+        <version>${hpi.plugin.version}</version>
+      </extension>
+    </extensions>
+
+    <plugins>
+      <plugin>
+        <groupId>org.jenkins-ci.tools</groupId>
+        <artifactId>maven-hpi-plugin</artifactId>
+        <version>${hpi.plugin.version}</version>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>
