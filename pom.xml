@@ -26,8 +26,6 @@
       </extension>
     </extensions>
   </build>
-  
-  <packaging>hpi</packaging>
 
   <name>Your Jenkins Plugin</name>
   <url>https://github.com/your-repo/your-plugin</url>
