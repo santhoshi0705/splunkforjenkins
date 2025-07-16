@@ -9,4 +9,4 @@ RUN apt-get update && apt-get install -y curl
 USER jenkins
 
 # Install the unique-id plugin
-RUN jenkins-plugin-cli --plugins unique-id
+RUN jenkins-plugin-cli --plugins unique-id
