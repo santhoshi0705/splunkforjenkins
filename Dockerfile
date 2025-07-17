@@ -1,14 +1,12 @@
-# Use Maven image with OpenJDK 17
-FROM maven:3.9.9-eclipse-temurin-17 AS builder
+FROM jenkins/jenkins:lts
 
-# Set working directory
-WORKDIR /app
+USER root
 
-# Copy source code into container
-COPY . .
+# Optional: install curl if needed
+RUN apt-get update && apt-get install -y curl
 
-# Run Maven validate or install
-RUN mvn clean install -DskipTests
+# Switch back to jenkins user
+USER jenkins
 
-# Final image (optional if you want to just build)
-# You can copy the .hpi file out of the container in a multi-stage setup
+# Install the unique-id plugin
+RUN jenkins-plugin-cli --plugins unique-id
